@@ -1,0 +1,75 @@
+
+<html>
+<head>
+<title>Gaidot dzimšanas dienu</title>
+  <script type=text/javascript>
+  function getYear(){
+     return getNumber("gads")
+  }
+  
+  function getMonth(){
+      return getNumber("menesis")
+  }
+  
+  function getDate() {
+      return getNumber("datums")
+    }
+  
+  function getNumber(s){
+     var theForm = document.forms["dz"];
+    var y = theForm.elements[s];
+    if (isNaN(y.value))
+        alert("Year should be only digits") 
+    if (y.value=="")
+        alert("Aizpildiet laukumu")
+    cipari = y.value
+    return cipari;
+     
+  }
+  
+  function getData(year,month,day){
+     s=year+"-"+month+"-"+day;
+     date=new Date(s)
+     return date
+  }
+  
+  function daysToBirthday(birthdayDate){
+      d=new Date()
+      var time_difference = birthdayDate.getTime() - d.getTime();
+      var days_difference = time_difference / (1000 * 60 * 60 * 24); 
+      return (Math.ceil(days_difference)).toString();
+  }
+  
+  function finalString(){
+      s = daysToBirthday(getData(getYear(),getMonth(),getDate())).toString()
+      return s
+  }
+  
+  function myAlert(){
+      alert(daysToBirthday(getData(getYear(),getMonth(),getDate())).toString());
+  }
+  
+  
+</script>  
+
+</head>
+<body>
+    <h2>Gaidot dzimšanas dienu</h2>
+    <hr>
+<form action id="dz" onsubmit = "alert('privet')">
+<p> Ievadi pilnu datumu, kad Tev  būs tuvākā dzimšanas diena</p>
+  <label for="gads">Gads</label><br>
+  <input type="text" id="gads" ><br><br>
+  <label for="menesis">Mēnesis</label><br>
+  <input type="text" id="menesis" ><br><br>
+  <label for="datums">Diena</label><br>
+  <input type="text" id="datums" ><br><br>
+  <input type="button" value="Aprēķināt dienu skaitu līdz dzimšanas dienai" onclick='dienas.value = finalString()' />
+  
+
+  <p> Līdz svētkiem atlikušas</p>
+  <input type="text" id="dienas" ><br><br>
+  <p>dienas</p>
+</form>
+</body>
+</hmtl>
